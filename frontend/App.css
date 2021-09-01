@@ -1,0 +1,565 @@
+/*-------------+
+| Font imports |
++-------------*/
+
+/* Quote font */
+@font-face {
+    font-family: 'Quote';
+    src: local('Quote'), url('./fonts/AmaticSC-Regular.ttf') format('truetype');
+
+}
+
+/* Main content font */
+@font-face {
+    font-family: 'Main';
+    src: local('Main'), url('./fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bold';
+    src: local('Bold'), url('./fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+/*----------------------------------------------+
+| Different views for small mobile and computer |
++----------------------------------------------*/
+
+/*Computer*/
+@media only screen and (min-device-width: 601px) {
+
+
+    #title-bar {
+        height: 100px;
+    }
+
+    #searchbar {
+        font-size: 25px;
+        background: url("./cssimages/search.png") top left no-repeat;
+        background-size: 32px;
+        padding-left: 40px;
+    }
+
+    #sidebar {
+        top: 100px;
+        height: 170px;
+    }
+
+    #sidebar > div {
+        background-color: darkgray;
+        height: 80px;
+        overflow: visible;
+        width: max(calc(19 * 80px + 50px), 100%);
+    }
+
+    div.chapter-label {
+        top: 90px;
+    }
+
+    span.chapter {
+        overflow-y: visible;
+    }
+
+    span.chapter:hover > div.chapter-label {
+        visibility: visible;
+    }
+
+    div.main  {
+        top: calc(100px + 80px);
+        height: calc(100vh - 100px - 80px);
+    }
+
+    div.quote {
+        height: 30%;
+        max-height: 300px;
+        max-width: 873px;
+    }
+}
+
+/*Phone*/
+@media only screen and (max-device-width: 600px) {
+    body {
+        font-size: large;
+    }
+
+    #title-bar {
+        height: 140px;
+    }
+
+    #searchbar {
+        font-size: 50px;
+        background: url("./cssimages/search.png") top left no-repeat;
+        background-position: 0 6px;
+        background-size: 15%;
+        padding-left: 60px;
+    }
+
+    #sidebar {
+        top: 140px;
+        height: 120px;
+        background-color: darkgray;
+    }
+
+    #sidebar > div {
+        height: 100%;
+        width: calc(19 * 80px);
+    }
+
+    div.chapter-label {
+        top: -100px;
+    }
+
+    div.main {
+        top: calc(140px + 120px);
+        height: calc(100vh - 140px - 120px);
+    }
+
+    div.quote {
+        height: 40%;
+    }
+}
+
+html, body {
+    overflow-y: hidden;
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+/*---------------------+
+| Title related styles |
++---------------------*/
+
+.hide::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Title bar */
+#title-bar {
+    top:0;
+    left:0;
+    width:100%;
+    position:absolute;
+    background-color: white;
+}
+
+/* Main crisis connections logo */
+#title-bar img {
+    vertical-align: middle;
+    background-color: transparent;
+    height: 90%;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Div containing the main CC logo */
+#title-bar div.logo-div {
+    margin: auto;
+    width: fit-content;
+    height: 100%;
+    background-color: white;
+}
+
+#title-bar div.logo-div:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+/* Both dropdown & index buttons for mobile */
+input.index {
+    height: 100%;
+    background-color: white;
+    vertical-align: middle;
+}
+
+/* Aligns the buttons to the appropriate corners */
+#title-bar input.drop {
+    left: 0;
+}
+
+#title-bar input.index {
+    right: 0;
+}
+
+/* Search bar for computer view */
+#searchbar {
+    height: 30%;
+    bottom: 5px;
+    left: 5px;
+    width: 255px;
+    position: absolute;
+    border-radius: 5px;
+    border-style: solid;
+
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: background-color 1s;
+}
+
+#searchbar:hover, #searchbar:focus {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+
+div.chapter>a.image-link {
+    width: 100%;
+    height: 100%;
+    float: left;
+    display: inline-block;
+}
+
+#sidebar div.chapter>a {
+    display: inline-block;
+    width: 70px;
+}
+
+div.chapter-label {
+    position: absolute;
+    padding: 10px;
+    visibility: hidden;
+    z-index: 1;
+    background-color: darkgray;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+/*
+div.last {
+    left: calc(19 * 80px - 125px);
+}
+*/
+
+/*-----------------------+
+| Sidebar related styles |
++-----------------------*/
+
+/* Sidebar */
+#sidebar {
+    position: absolute;
+    float: left;
+    z-index: 2;
+    left: 0;
+    width: 100%;
+    overflow: scroll;
+}
+
+/* Individual chapter div in the sidebar */
+#sidebar span.chapter {
+    padding: 5px;
+    display: flex;
+    height: calc(100% - 10px);
+    float: left;
+}
+
+#sidebar a {
+    width: 100%;
+    height: 100%;
+}
+
+#sidebar div.frame {
+    height: 100%;
+    width: 70px;
+}
+
+#sidebar input[type=image] {
+    width: 100%;
+    height: 100%;
+}
+
+/*-----------------------+
+| Content related styles |
++-----------------------*/
+
+/* Allows the title of each page to be sticky on scroll */
+div.sticky {
+    display: inline-block;
+    position: sticky;
+    background-color: white;
+    width: 100%;
+    z-index: 1;
+    top: 0;
+}
+
+/* Sets the quote font & size */
+div.quote * {
+    font-family: 'Quote', sans-serif;
+}
+
+/* Formats for the quote box */
+div.quote {
+    width: 90%;
+    overflow-y: hidden;
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.gray {
+    width: 75%;
+    float: left;
+}
+
+div.text {
+    background-color: lightgray;
+    border-radius: 30px;
+    width: 100%;
+    float: left;
+    text-align: center;
+    max-height: 100%;
+}
+
+div.text > p {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+div.quote > img {
+    width: calc(25% - 5px);
+    margin-left: 5px;
+    float: right;
+    z-index: 0;
+    max-height: 100%;
+}
+
+/* Sets the main content font & size */
+p, dl, dt {
+    font-family: 'Main', sans-serif;
+}
+
+/* Sets links to be white in resource pop up / dropdown */
+div.center>a {
+    color: cornflowerblue;
+}
+
+/* Changes color of links on hover */
+div.center>a:hover {
+    color: rebeccapurple;
+}
+
+/*---------------------+
+| Various other styles |
++---------------------*/
+
+/* Aligns all content below the title bar. Sets appropriate height and scroll */
+div.main {
+    position: absolute;
+    overflow-y: auto;
+    width: calc(100% - 10px);
+    left: 5px;
+}
+
+/* Colors for the main pages */
+/* Purple pages */
+div.purple>div>h1 {
+    background-color: rebeccapurple;
+}
+
+div.purple>h4, div.purple>p::selection {
+    background-color: #d79cff;
+}
+
+div.purple>h4>a {
+    color: rebeccapurple;
+}
+
+div.purple>p>a {
+    color: #d79cff;
+}
+
+/* Blue pages */
+div.blue>div>h1 {
+    background-color: dodgerblue;
+}
+
+div.blue>h4, div.blue>p::selection {
+    background-color: skyblue;
+}
+
+div.blue>h4>a {
+    color: dodgerblue;
+}
+
+div.blue>p>a {
+    color: skyblue;
+}
+
+/* Green pages */
+div.green>div>h1 {
+    background-color: yellowgreen;
+}
+
+div.green>h4, div.green>p::selection {
+    background-color: #c8f288;
+}
+
+div.green>h4>a, div.green>p>a {
+    color: yellowgreen;
+}
+
+/* Orange pages */
+div.orange>div>h1 {
+    background-color: darkorange;
+}
+
+div.orange>h4, div.orange>p::selection {
+    background-color: lightsalmon;
+}
+
+div.orange>h4>a {
+    color: darkorange;
+}
+
+div.orange>p>a {
+    color: lightsalmon;
+}
+
+/* Format of the various titles (big & small) */
+h1 {
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+h4 {
+    padding-left: 5px;
+    border-radius: 5px;
+    font-family: 'Main', sans-serif;
+}
+
+/* Removes annoying blue outline on button clicks */
+input:focus {
+    outline: none;
+}
+
+/*------------------------+
+| Text formatting classes |
++------------------------*/
+
+.center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.indented {
+    margin-left: 50px;
+}
+
+.right {
+    float: right;
+    margin-top: 0;
+    font-family: 'Quote', sans-serif;
+}
+
+/* Fun symbols before links */
+#content a[href^="tel"]:before {
+    content: '☎️ ';
+}
+
+#content a[href^="https"]:before {
+    content: '💻 ';
+}
+
+#content a[href^="mailto"]:before {
+    content: '✉️ ';
+}
+
+p {
+    margin-top: 0;
+}
+
+/* Removes pesky underline from links */
+a {
+    text-decoration: none;
+}
+
+/* Puts dots before all table elements */
+dt:before {
+    content: "• ";
+}
+
+b {
+    font-family: 'Bold', sans-serif;
+}
+
+h1.resource-title {
+    background-color: lightgray;
+    margin-bottom: 10px;
+}
+
+#resources {
+    height: calc(100% - 170px);
+    overflow-y: scroll;
+}
+
+#resource-wrapper {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+div.link, div.tel {
+    width: 50%;
+    display: inline-block;
+}
+
+div.tabs {
+    height: 35px;
+}
+
+div.title {
+    height: auto;
+    margin-bottom: 5px;
+}
+
+div.tabs > input {
+    width: calc(25% - 20px);
+    height: 100%;
+    margin: 10px;
+    border-radius: 10px;
+    border-style: hidden;
+}
+
+div.tabs > input.selected {
+    background-color: darkgray;
+}
+
+
+a, dt, p, dl {
+    font-size: 1.25rem;
+}
+
+.right, div.quote * {
+    font-size: 1.3em;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h4 {
+    font-size: 2em;
+}
+
+div.tabs > input {
+    font-size: 1.3em;
+}
+
+div.link > a, div.tel > a {
+    font-size: 1.5em;
+}
+
+div.resource-header > div {
+    font-size: 1.9em;
+    margin-top: 10px;
+}
